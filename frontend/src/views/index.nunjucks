@@ -1,0 +1,20 @@
+{% extends "base.nunjucks" %}
+
+{% block content %}
+  <div id="stars"></div>
+  <form id="translate-form" class="translate-form text-center" method="post" action="/">    
+    <h1 class="h1 mb-5 font-weight-normal">You speak Yoda</h1>
+    <a href="/">
+      <img class="yoda-img mb-4" src="/img/yoda.png" alt="Yoda listening">
+    </a>
+    <div class="translation d-block h5 font-weight-normal font-italic mt-3 p-3 mb-5 rounded {%if translation %}visible{% endif %}">&#8220;{{ translation }}&#8221;</div>
+    <label for="input" class="sr-only">Text to translate</label>
+    <input name="text" type="text" class="form-control rounded px-4 py-4 translate-text" placeholder="Text to translate" required autofocus value="{% if text %}{{ text }}{% endif %}"/>
+    <button class="mt-4 btn btn-md btn-primary" type="submit">Translate</button>
+    <p class="mt-5 mb-3 text-muted">
+      <small>A sample application using <a href="https://doppler.com">Doppler</a> for secrets and environment variable configuration</small>
+    </p>
+  </form>
+  <script src="/js/index.js"></script>
+  {{ captcha | safe}}
+{% endblock %}

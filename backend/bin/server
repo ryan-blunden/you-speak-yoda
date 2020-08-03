@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+CERT_PATH=/tmp/yodaspeak.crt
+KEY_PATH=/tmp/yodaspeak.key
+
+# Cleanup cert and key
+trap "rm -f ${CERT_PATH} ${KEY_PATH}" SIGINT
+
+# Save cert and key to files as that's what `flask run` requires
+printf "%s" "${TLS_CERT}" > ${CERT_PATH}
+printf "%s" "${TLS_KEY}" > ${KEY_PATH}
+
+flask run --host ${HOSTNAME} --port ${PORT} --cert ${CERT_PATH} --key ${KEY_PATH}
